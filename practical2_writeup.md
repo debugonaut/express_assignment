@@ -111,9 +111,8 @@ ExpressJS executes an interceptor pipeline of middleware functions that process 
 ---
 
 ## Output Screenshots
-- **Figure 1:** Express Server-Side Validation Portal Interface (Initial State & Shadcn Design System)
-- **Figure 2:** Server-Side Validation Failure (HTTP 422 Unprocessable Entity with Field-Level Diagnostics)
-- **Figure 3:** Server-Side Validation Success (HTTP 201 Created with Sanitized Entity & Real-Time Audit Log)
-- **Figure 4:** Service Ticket & Feedback Schema (Enforcing XSS HTML Escaping, URL Validation & Rating Bounds)
+- **Figure 1:** Express Server-Side Validation Portal Interface (Initial State & Minimal Shadcn Card Design)
+- **Figure 2:** Server-Side Validation Failure (HTTP 422 Unprocessable Entity - Underage <18 Field Diagnostics)
+- **Figure 3:** Server-Side Validation Success (HTTP 201 Created with Sanitized User Entity & Verified Audit Box)
 
 *(Full screenshots formatted and embedded directly in [202401100026_WT_practical2.pdf](file:///Users/aadeshkhande/Documents/Professional/College/WEB%20Tech/Nupoor/202401100026_WT_practical2.pdf))*.
