@@ -4,8 +4,8 @@
 **PRN:** 202401100026  
 **Div:** A **Batch:** A2  
 
-**Deployed Link:** [express-validation-portal.vercel.app](https://express-validation-portal.vercel.app)  
-**Github Repository for code:** [https://github.com/nupoor-deshpande/express-server-validation](https://github.com/nupoor-deshpande/express-server-validation)  
+**Deployed Link:** [express-assignment-virid.vercel.app](https://express-assignment-virid.vercel.app/)  
+**Github Repository for code:** [https://github.com/debugonaut/express_assignment](https://github.com/debugonaut/express_assignment)  
 
 ---
 

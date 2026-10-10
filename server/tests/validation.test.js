@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import app from '../index.js';
+import app from '../app.js';
 
 let server;
 let baseUrl;

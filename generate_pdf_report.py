@@ -183,8 +183,8 @@ html_content = f"""<!DOCTYPE html>
   </div>
 
   <div class="links">
-    Deployed Link: <a href="https://express-validation-portal.vercel.app">express-validation-portal</a><br>
-    Github Repository for code: <a href="https://github.com/nupoor-deshpande/express-server-validation">Codes</a>
+    Deployed Link: <a href="https://express-assignment-virid.vercel.app/">express-assignment</a><br>
+    Github Repository for code: <a href="https://github.com/debugonaut/express_assignment">Codes</a>
   </div>
 
   <div class="aim">

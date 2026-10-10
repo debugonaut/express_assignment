@@ -9,10 +9,13 @@
     "dev:server": "node --watch server/index.js",
     "dev:client": "npm run dev --prefix client",
     "build:client": "npm run build --prefix client",
-    "build": "npm run build:client",
+    "build": "npm --prefix client install && npm --prefix client run build",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "test": "NODE_ENV=test node --test server/tests/validation.test.js"
   },
+  "workspaces": [
+    "client"
+  ],
   "keywords": [
     "express",
     "express-validator",

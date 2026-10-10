@@ -45,4 +45,20 @@ router.get('/health', (req, res) => {
   });
 });
 
+// Route: API Index / Info
+router.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'online',
+    framework: 'ExpressJS',
+    description: 'Server-side validation service with express-validator',
+    endpoints: {
+      health: 'GET /api/health',
+      register: 'POST /api/register',
+      login: 'POST /api/login',
+      feedback: 'POST /api/feedback',
+      submissions: 'GET /api/submissions',
+    },
+  });
+});
+
 export default router;
