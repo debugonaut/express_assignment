@@ -34,9 +34,11 @@ app.use((err, req, res, next) => {
 app.use('/api', apiRoutes);
 app.use('/', apiRoutes);
 
-// Serve client production static files if client/dist or public exists
+// Serve client production static files from dist, client/dist, or public
+const rootDistPath = path.resolve(__dirname, '../dist');
 const clientDistPath = path.resolve(__dirname, '../client/dist');
 const publicPath = path.resolve(__dirname, '../public');
+app.use(express.static(rootDistPath));
 app.use(express.static(clientDistPath));
 app.use(express.static(publicPath));
 
