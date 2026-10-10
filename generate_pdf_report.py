@@ -1,13 +1,18 @@
 import os
 import weasyprint
 import pypdf
+import base64
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-img1 = os.path.join(current_dir, "screenshot_1_overview.png")
-img2 = os.path.join(current_dir, "screenshot_2_invalid.png")
-img3 = os.path.join(current_dir, "screenshot_3_valid.png")
-img4 = os.path.join(current_dir, "screenshot_4_feedback.png")
+def get_base64_img(filename):
+    path = os.path.join(current_dir, filename)
+    with open(path, "rb") as f:
+        return f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+
+img1 = get_base64_img("screenshot_1_overview.png")
+img2 = get_base64_img("screenshot_2_invalid.png")
+img3 = get_base64_img("screenshot_3_valid.png")
 
 html_content = f"""<!DOCTYPE html>
 <html lang="en">
