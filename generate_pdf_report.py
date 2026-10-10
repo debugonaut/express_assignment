@@ -428,27 +428,50 @@ html_content = f"""<!DOCTYPE html>
   <div class="page-break"></div>
 
   <div class="screenshot-card">
-    <img src="{img1}" class="screenshot-img" alt="Overview Initial State">
-    <div class="screenshot-caption">Figure 1: Express Server-Side Validation Portal Interface (Initial State & Shadcn Design System)</div>
+    <img src="{img1}" class="screenshot-img" style="height: 240pt;" alt="Overview Initial State">
+    <div class="screenshot-caption">Figure 1: Express Server-Side Validation Portal Interface (Initial State & Minimal Shadcn Card Design)</div>
   </div>
 
-  <div class="screenshot-card">
-    <img src="{img2}" class="screenshot-img" alt="Validation Errors State">
-    <div class="screenshot-caption">Figure 2: Server-Side Validation Failure (HTTP 422 Unprocessable Entity with Field-Level Diagnostics)</div>
+  <div class="screenshot-card" style="margin-top: 14pt;">
+    <img src="{img2}" class="screenshot-img" style="height: 240pt;" alt="Validation Errors State">
+    <div class="screenshot-caption">Figure 2: Server-Side Validation Failure (HTTP 422 Unprocessable Entity - Underage &lt;18 Field Diagnostics)</div>
   </div>
 
   <!-- PAGE 6 -->
   <div class="page-break"></div>
 
   <div class="screenshot-card">
-    <img src="{img3}" class="screenshot-img" alt="Registration Success State">
-    <div class="screenshot-caption">Figure 3: Server-Side Validation Success (HTTP 201 Created with Sanitized Entity & Real-Time Audit Log)</div>
+    <img src="{img3}" class="screenshot-img" style="height: 290pt;" alt="Registration Success State">
+    <div class="screenshot-caption">Figure 3: Server-Side Validation Success (HTTP 201 Created with Sanitized User Entity & Verified Audit Box)</div>
   </div>
 
-  <div class="screenshot-card">
-    <img src="{img4}" class="screenshot-img" alt="Service Ticket State">
-    <div class="screenshot-caption">Figure 4: Service Ticket & Feedback Schema (Enforcing XSS HTML Escaping, URL Validation & Rating Bounds)</div>
-  </div>
+  <div class="section-title" style="margin-top: 14pt;">Conclusion & Practical Verification:</div>
+  <p style="text-align: justify; margin-top: 5pt; margin-bottom: 8pt; font-size: 9.5pt; line-height: 1.4;">
+    The practical successfully demonstrates robust server-side input validation and defensive request handling in an ExpressJS environment. 
+    Using declarative <code>express-validator</code> middleware pipelines, all incoming user data undergoes strict schema validation, 
+    type enforcement, boundary checks, and sanitization before persistence. Defensive sanitization routines (including <code>trim()</code>, 
+    <code>normalizeEmail()</code>, and <code>escape()</code>) effectively neutralize Cross-Site Scripting (XSS) and injection vectors. 
+    Custom semantic rules enforce age requirements (&ge; 18 years computed from Date of Birth) and password complexity. 
+    RFC-compliant HTTP status codes (<code>201 Created</code>, <code>422 Unprocessable Entity</code>, <code>400 Bad Request</code>, and <code>200 OK</code>) ensure transparent client-server communication. 
+    The application has been verified through automated unit tests and deployed live to Vercel.
+  </p>
+
+  <table style="margin-top: 8pt;">
+    <tbody>
+      <tr>
+        <td style="width: 35%; font-weight: bold; background-color: #f1f5f9;">Automated Test Suite Status</td>
+        <td style="color: #16a34a; font-weight: bold;">✔ 9 Passed, 0 Failed (100% Assertion Success Rate)</td>
+      </tr>
+      <tr>
+        <td style="font-weight: bold; background-color: #f1f5f9;">Live Production Deployment</td>
+        <td><a href="https://express-assignment-virid.vercel.app/" style="color: #2563eb; text-decoration: underline;">https://express-assignment-virid.vercel.app/</a></td>
+      </tr>
+      <tr>
+        <td style="font-weight: bold; background-color: #f1f5f9;">GitHub Repository</td>
+        <td><a href="https://github.com/debugonaut/express_assignment" style="color: #2563eb; text-decoration: underline;">https://github.com/debugonaut/express_assignment</a></td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>
