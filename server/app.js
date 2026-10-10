@@ -34,27 +34,33 @@ app.use((err, req, res, next) => {
 app.use('/api', apiRoutes);
 app.use('/', apiRoutes);
 
-// Serve client production static files if client/dist exists
+// Serve client production static files if client/dist or public exists
 const clientDistPath = path.resolve(__dirname, '../client/dist');
+const publicPath = path.resolve(__dirname, '../public');
 app.use(express.static(clientDistPath));
+app.use(express.static(publicPath));
 
-// Fallback to client/dist/index.html for SPA routes
+// Fallback to client/dist/index.html or public/index.html for SPA routes
 app.get('*', (req, res, next) => {
   if (req.originalUrl.startsWith('/api')) {
     return next();
   }
   res.sendFile(path.join(clientDistPath, 'index.html'), (err) => {
     if (err) {
-      res.status(200).send(`
-        <!DOCTYPE html>
-        <html>
-          <head><title>Express Server-Side Validation</title></head>
-          <body style="font-family: sans-serif; background: #09090b; color: #f4f4f5; padding: 40px; text-align: center;">
-            <h2>Express Validation Server Active</h2>
-            <p>API endpoints running on <code>/api</code></p>
-          </body>
-        </html>
-      `);
+      res.sendFile(path.join(publicPath, 'index.html'), (err2) => {
+        if (err2) {
+          res.status(200).send(`
+            <!DOCTYPE html>
+            <html>
+              <head><title>Express Server-Side Validation</title></head>
+              <body style="font-family: sans-serif; background: #09090b; color: #f4f4f5; padding: 40px; text-align: center;">
+                <h2>Express Validation Server Active</h2>
+                <p>API endpoints running on <code>/api</code></p>
+              </body>
+            </html>
+          `);
+        }
+      });
     }
   });
 });
