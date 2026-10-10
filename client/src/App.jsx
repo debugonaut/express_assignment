@@ -104,15 +104,6 @@ export default function App() {
       errors.push({ field: 'username', message: 'Username can only contain letters, numbers, and underscores.' });
     }
 
-    const ageNum = parseInt(payload.age, 10);
-    if (payload.age === undefined || payload.age === '' || isNaN(ageNum)) {
-      errors.push({ field: 'age', message: 'Age is required and must be an integer.' });
-    } else if (ageNum < 18) {
-      errors.push({ field: 'age', message: 'User must be at least 18 years old to register.' });
-    } else if (ageNum > 100) {
-      errors.push({ field: 'age', message: 'Age cannot exceed 100 years.' });
-    }
-
     if (!payload.password) {
       errors.push({ field: 'password', message: 'Password is required.' });
     } else {
@@ -124,19 +115,50 @@ export default function App() {
         errors.push({ field: 'password', message: 'Password must contain at least one lowercase letter (a-z).' });
       } else if (!/[0-9]/.test(payload.password)) {
         errors.push({ field: 'password', message: 'Password must contain at least one numeric digit (0-9).' });
-      } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(payload.password)) {
-        errors.push({ field: 'password', message: 'Password must contain at least one special character (!@#$%^&*).' });
+      } else if (!/[!@#$%^&*(),.?":{}|<>_\-]/.test(payload.password)) {
+        errors.push({ field: 'password', message: 'Password must contain at least one special character (!@#$%^&*...).' });
       }
     }
 
     if (!payload.confirmPassword) {
       errors.push({ field: 'confirmPassword', message: 'Please confirm your password.' });
     } else if (payload.password !== payload.confirmPassword) {
-      errors.push({ field: 'confirmPassword', message: 'Password confirmation does not match the entered password.' });
+      errors.push({ field: 'confirmPassword', message: 'Passwords do not match.' });
     }
 
-    if (!payload.termsAccepted) {
-      errors.push({ field: 'termsAccepted', message: 'You must accept the terms of service and conditions.' });
+    if (!payload.phone || !payload.phone.trim()) {
+      errors.push({ field: 'phone', message: 'Phone number is required.' });
+    } else if (!/^(\+91[\-\s]?)?[6-9]\d{9}$/.test(payload.phone.trim())) {
+      errors.push({ field: 'phone', message: 'Enter a valid 10-digit phone number starting with 6-9 (optionally with +91).' });
+    }
+
+    if (!payload.dob) {
+      errors.push({ field: 'dob', message: 'Date of birth is required.' });
+    } else {
+      const birthDate = new Date(payload.dob);
+      if (isNaN(birthDate.getTime())) {
+        errors.push({ field: 'dob', message: 'Date of birth must be a valid date in YYYY-MM-DD format.' });
+      } else {
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        if (age < 18) {
+          errors.push({ field: 'dob', message: `Age requirement not met: You must be at least 18 years old (Calculated age: ${age}).` });
+        } else if (age > 120) {
+          errors.push({ field: 'dob', message: 'Please enter a realistic date of birth.' });
+        }
+      }
+    }
+
+    if (!payload.role) {
+      errors.push({ field: 'role', message: 'Please select a designation/role.' });
+    }
+
+    if (payload.terms !== true && payload.terms !== 'true') {
+      errors.push({ field: 'terms', message: 'You must accept the terms and conditions.' });
     }
 
     return errors;
@@ -227,8 +249,9 @@ export default function App() {
           fullName: payload.fullName,
           email: payload.email,
           username: payload.username,
-          age: parseInt(payload.age, 10),
-          role: 'Student'
+          phone: payload.phone,
+          dob: payload.dob,
+          role: payload.role || 'Fullstack Developer'
         },
         timestamp: new Date().toISOString()
       };
